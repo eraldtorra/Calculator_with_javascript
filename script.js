@@ -32,7 +32,6 @@ function handleOperator(nextOperator) {
 
   const { firstOperand, displayValue, operator } = calculator;
 
-  console.log("Cal obj: first "+firstOperand+" display "+ displayValue+" opera "+ operator+ " wait "+calculator.waitingForSecondOperand);
 
   let inputValue;
   
@@ -43,31 +42,29 @@ function handleOperator(nextOperator) {
 
     const parts = displayValue.split(operator);
 
-    console.log("Parts:"+parts[1]);
-
+    
     inputValue = parseFloat(parts[1]);
   }
 
      
  
-  console.log("Pars:"+inputValue);
 
 
   if (operator && calculator.waitingForSecondOperand) {
     calculator.operator = nextOperator;
-    console.log("if 1: displayValue:"+displayValue+" firstOperand:"+calculator.firstOperand+" waitingForSecondOperand:"+calculator.waitingForSecondOperand+" operator:"+calculator.operator);
+    
     return;
   }
 
   if (firstOperand == null && !isNaN(inputValue)) {
     calculator.firstOperand = inputValue;
-    console.log("if 2: displayValue:"+displayValue+" firstOperand:"+calculator.firstOperand+" waitingForSecondOperand:"+calculator.waitingForSecondOperand+" operator:"+calculator.operator);
+    
   } else if (operator) {
     const result = calculate(firstOperand, inputValue, operator);
 
     calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
     calculator.firstOperand = result;
-    console.log("if 3: displayValue:"+displayValue+" firstOperand:"+calculator.firstOperand+" waitingForSecondOperand:"+calculator.waitingForSecondOperand+" operator:"+calculator.operator);
+    
   }
 
 
@@ -76,7 +73,7 @@ function handleOperator(nextOperator) {
   calculator.displayValue = `${calculator.displayValue} ${nextOperator} `;
   
 
-  console.log(" 4: displayValue:"+displayValue+" firstOperand:"+calculator.firstOperand+" waitingForSecondOperand:"+calculator.waitingForSecondOperand+" operator:"+calculator.operator );
+  
 }
 function calculate(firstOperand, secondOperand, operator) {
   if (operator === '+') {
@@ -106,7 +103,7 @@ function backButton() {
     calculator.operator = null;
     calculator.firstOperand = null;
 
-    console.log("back: displayValue:"+calculator.displayValue+" firstOperand:"+calculator.firstOperand+" waitingForSecondOperand:"+calculator.waitingForSecondOperand+" operator:"+calculator.operator);
+    
 }else{
   calculator.displayValue = displayValue.slice(0, -1);
   
